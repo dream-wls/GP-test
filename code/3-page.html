@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<h1>欢迎登录~</h1>
+<p>您上次登录的时间：<span class="show">2020年8月2日14时20分</span></p>
+
+<script src="./utils.js"></script>
+<script>
+var show = $1('.show');
+if (getCookie('lastTime')) {
+    show.innerText = getCookie('lastTime');
+} else {
+    show.innerText = '您最近一周未登录~';
+}
+
+// 2020年8月2日14时20分
+var d = new Date();
+var dateStr = d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日'+d.getHours()+'时'+d.getMinutes()+'分';
+setCookie({
+    key: 'lastTime',
+    val: dateStr,
+    days: 7
+});
+
+
+
+</script>
+</body>
+</html>

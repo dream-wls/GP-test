@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.cookie = 'user1=2345';
+        document.cookie = 'user2=4444';
+
+        document.cookie = 'user3=6666;domain=127.0.0.1';
+        document.cookie = 'user4=7777;path=';
+
+        //设置有效期的cookie
+        var d = new Date();
+        d.setDate(d.getDate() + 3);
+        document.cookie = 'user5=4545;expires='+d; 
+
+        function setCookie(options) {
+            if(!options.key || !options.val) {
+                throw new Error('设置失败，缺失必要参数');
+
+            }
+            options.days = options.days ||0;
+            options.domain = options.domain || 0;
+        }
+
+        setCookid({
+            key:'user6',
+            val: '3333'
+        })
+
+    </script>
+</body>
+</html>

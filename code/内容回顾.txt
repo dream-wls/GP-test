@@ -1,0 +1,93 @@
+
+事件
+
+事件的绑定和移除
+
+绑定事件（不能给未来元素绑定事件）
+$().click()
+$().mouseenter()
+$().bind(type,function(){})
+$().bind({
+    mouseover: function,
+    mouseout: function
+})
+移除事件
+$().unbind(type)
+
+1.4之前
+$().live(type,function)  可以给未来元素绑定事件
+$().die(type) 移除
+
+1.4-1.7
+$(parent).delegate('child',type,function)  可以给未来元素绑定事件
+$(parent).undelegate('child',type)
+
+1.7之后，推荐
+$(parent).on(type,'child',function) 可以给未来元素绑定事件
+$(parent).off(type,'child') 移除事件
+$().on(type,function) 不可以给未来元素绑定事件
+
+事件流
+W3C标准的事件流：先进入捕获阶段，（目标阶段）再进入冒泡阶段
+浏览器默认事件流：冒泡
+事件流的特征：传播！
+
+事件对象
+JQ对事件对象进行了封装，解决了大部分兼容问题
+可以直接获取并使用
+e.preventDefault()
+e.stopPropagation()
+e.target  DOM对象 
+
+JQ对象和DOM对象的转换
+$(dom)
+$('.box')[0]
+$('.box').get(0)
+
+$冲突问题
+一个页面引入了多个类库，并且多个类库都定义了$
+jQuery === $
+$.noConflict() 放弃$所有权
+jQuery(function ($){
+
+})
+
+JQ扩展接口
+$.extend(布尔值，对象1，对象2)
+布尔值：深复制或浅复制，默认false浅复制
+
+$.extend({}) 扩展jQuery类的方法
+$.extend($.fn,{}) 扩展jQuery实例对象的方法
+$.fn.extend({}) 扩展jQuery实例对象的方法
+
+JQ ajax
+$.ajax({
+    url: 数据地址,
+    type: 请求类型，
+    data: 发送到服务器的数据,
+    dataType: 服务器返回的数据类型,
+    cache: true/false,
+    timeout: 3000,
+    beforeSend: function(xhr){},
+    success: function,
+    error: function,
+    complete: function
+})
+
+$.get()
+$.post()
+$.getJSON();
+$.getScript()
+$().load()
+
+jsonp
+$.ajax({
+    url: ,
+    type: 'get',
+    data: '',
+    dataType: 'jsonp',  *
+    jsonp: 'cb',  *
+    jsonpCallback: 'myCallback', 可选
+    success: function(json){}
+})
+

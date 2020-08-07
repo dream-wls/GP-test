@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+
+// 设置cookie
+document.cookie = 'user1=1234';// 设置
+document.cookie = 'user2=5678';// 设置
+document.cookie = 'user2=9999';// 修改
+
+// document.cookie = 'user3=6666; domain=';//当前域名
+document.cookie = 'user3=6666; domain=127.0.0.1';
+
+// document.cookie = 'user4=7777; path=';
+document.cookie = 'user4=7777; path=/test';
+
+// 设置带有效期的cookie
+var d = new Date();
+d.setDate(d.getDate()+3);
+document.cookie = 'user5=8888; expires='+d;
+//设置cookie
+function setCookie(options){
+    if (!options.key || !options.val) {
+        throw new Error('设置失败，缺少必要参数！');
+    }
+    options.days = options.days || 0;
+    options.domain = options.domain || '';
+    options.path = options.path || '';
+    if (options.days === 0) {
+        document.cookie = options.key + '=' + escape(options.val) + '; domain=' + options.domain + '; path=' + options.path;
+    } else {
+        var d = new Date();
+        d.setDate(d.getDate()+options.days);
+        document.cookie = options.key + '=' + escape(options.val) + '; domain=' + options.domain + '; path=' + options.path + '; expires=' + d;
+    }
+}
+setCookie({
+    key: 'user6',
+    val: '123=456; abcs%&sdf',
+    days: 7,
+    // domain: 'localhost',
+    // path: '/test'
+});
+
+
+// 获取cookie
+// 'user1=1234; user5=8888; user6=123456; user2=9999'
+var cookieStr = document.cookie;
+console.log( cookieStr );
+// 我要获取user5对应的值，split(分割符)
+var arr1 = cookieStr.split('; ');
+console.log( arr1 );
+// ["user1=1234", "user5=8888", "user6=123456", "user2=9999"]
+var arr2 = arr1[1].split('=');
+console.log(arr2);// ["user5", "8888"]
+
+// 获取cookie
+function getCookie(key){
+    var arr1 = document.cookie.split('; ');
+    for (var i = 0, len = arr1.length; i < len; i++){
+        var arr2 = arr1[i].split('=');
+        if (arr2[0] === key) {
+            return unescape(arr2[1]);
+        }
+    }
+    return null;
+}
+
+console.log( getCookie('user5') );
+console.log( getCookie('user2') );
+console.log( getCookie('user6') );
+
+
+// 删除cookie
+function removeCookie(key){
+    setCookie({
+        key: key,
+        val: '1234',
+        days: -5
+    });
+}
+
+removeCookie('user6');
+
+</script>
+</body>
+</html>

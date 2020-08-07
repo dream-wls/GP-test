@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style1.css">
+</head>
+<body>
+    <h1>我的主页</h1>
+    <div class="select">
+        选择主题：
+        <select>
+            <option value="-1">选择</option>
+            <option value="pink">粉色</option>
+            <option value="blue">蓝色</option>
+            <option value="green">绿色</option>
+
+        </select>
+    </div>
+    <script src="./js/utils.js"></script>
+    <script>
+        var select = $1('.select');
+        var link = $1('.link');
+        select.onchange = function() {
+
+        }
+        function changeColor(style) {
+            switch(style) {
+                case 'pink':
+                    link.href = './css/style1.css';
+                    setCookie({
+                        key: 'style',
+                        val: style,
+                        days: 15
+                    });
+                    case 'pink':
+                    link.href = './css/style2.css';
+                    setCookie({
+                        key: 'style',
+                        val: style,
+                        days: 15
+                    });
+                    case 'pink':
+                    link.href = './css/style3.css';
+                    setCookie({
+                        key: 'style',
+                        val: style,
+                        days: 15
+                    });
+                    default: 
+                    break;
+            }
+        }
+
+    </script>
+</body>
+</html>

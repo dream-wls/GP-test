@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        html,body {
+            height: 100%;
+            width: 100%;
+        }
+        .box {
+            position: relative;
+            right: 20px;
+            top: 10px;
+            color: red;
+            cursor: pointer;
+
+            
+        }
+        form {
+            width: 400px;
+            height: 200px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -100px 0 -200px 0;
+            z-index: 999;
+            background-color: #fff;
+        }
+        form span {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            cursor: pointer;
+
+        }
+        .mask {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            opacity: 0.4;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <span class="box">登录</span>
+    <form action="login">
+        <span class="close">X</span>
+        <p>账号：<input type="text" class="user">   </p>
+        <p>密码：<input type="text" class="pass">   </p>
+        <p>记住账号：<input type="checkbox" class="logo"> </p>
+        <p><input type="submit" value="登录"></p>
+    </form>
+    <script src="./js/utils.js"></script>
+    <script>
+        var box = $1('.box');
+        var close = $1('.close');
+        var user = $('.user');
+        var form = $1('form');
+        box.onclick = function() {
+            form.style.display = 'block';
+            mask.style.display = 'block';
+            //判断事情是否有cookie
+            if(getCookie('username')) {
+                user.value =getCookie('username');
+                pass.value = getCookie('password');
+                auto.checked = true;
+            }
+
+        }
+        close.onclick = function() {
+            form.style.display = 'none';
+            mask.style.display = 'none';
+        }
+
+        form.onsubmit = function() {
+            if(!user.value || !pass.value) {
+                alert('输入不能为空');
+                return false;
+            }
+            if(auto.checked) {
+                setCookie({
+                    key:'username',
+                    val: pass.value,
+                    days: 7
+                });
+            } else {
+                removeCookie()
+            }
+        }
+    </script>
+</body>
+</html>
